@@ -23,11 +23,11 @@ const (
 // 算法
 const (
 	ALGORITHM_LEVENSHTEIN = iota
-	ALGORITHM_COSINE
+	ALGORITHM_COSINES
 	ALGORITHM_DICES_COEFFICIENT
 	ALGORITHM_HAMMING
 	ALGORITHM_JARO
-	ALGORITHM_SIMHASH
+	ALGORITHM_SINES
 )
 
 //
@@ -35,7 +35,6 @@ const (
 //
 type Config struct {
 	Ignore    int // 忽略。空格,大小写，html标签
-	Unicode   int // 使用ASCII还是UTF8
 	Algorithm int // 所使用算法
 }
 
@@ -60,10 +59,14 @@ func (cfg *Config) Configure(opts ...Option) *Config {
 	return cfg
 }
 
+//
+// @Description: 默认配置
+// @Date: 2021-03-26 17:12:38
+// @return *Config
+//
 func Default() *Config {
 	return &Config{
 		Ignore:    IGNORE_NONE,
-		Unicode:   UNICODE_UTF8,
 		Algorithm: ALGORITHM_LEVENSHTEIN,
 	}
 }

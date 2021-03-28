@@ -8,8 +8,6 @@
 package algorithm
 
 import (
-	"fmt"
-
 	"github.com/infoidx/similar/configure"
 )
 
@@ -20,10 +18,37 @@ type Comparer interface {
 	Compare(source, target string) float64
 }
 
-func New(opts ...configure.Option) Comparer {
-	cfg := configure.Default().Configure(opts...)
-	// TODO 根据cfg实现，初始化正确的方法
+func New(cfg *configure.Config) Comparer {
+	var comparer Comparer
+	switch cfg.Algorithm {
+	case configure.ALGORITHM_COSINES:
+		comparer = &Cosines{}
+	case configure.ALGORITHM_DICES_COEFFICIENT:
+		comparer = &DicesCoefficient{}
+	case configure.ALGORITHM_HAMMING:
+		comparer = &Hamming{}
+	case configure.ALGORITHM_JARO:
+		comparer = &Jaro{}
+	case configure.ALGORITHM_SINES:
+		comparer = &Sines{}
+	case configure.ALGORITHM_LEVENSHTEIN:
+		comparer = &Levenshtein{}
+	default:
+		comparer = &Levenshtein{}
+	}
+	return comparer
+}
 
-	fmt.Println(cfg)
-	return nil
+func min(x, y int) int {
+	if x < y {
+		return x
+	}
+	return y
+}
+
+func max(x, y int) int {
+	if x < y {
+		return y
+	}
+	return x
 }
