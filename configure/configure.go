@@ -15,11 +15,6 @@ const (
 	REPLACE_TABOO             // 替换敏感词
 )
 
-const (
-	UNICODE_UTF8  = iota // 使用UTF8编码
-	UNICODE_ASCII        //使用ASCII编码
-)
-
 // 算法
 const (
 	ALGORITHM_LEVENSHTEIN = iota
