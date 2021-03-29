@@ -49,8 +49,8 @@ func Compare(source, target string, opts ...configure.Option) float64 {
 // @return configure.Option
 //
 func UseLevenshtein() configure.Option {
-	return func(config *configure.Config) {
-
+	return func(cfg *configure.Config) {
+		cfg.Algorithm = configure.ALGORITHM_LEVENSHTEIN
 	}
 }
 
@@ -60,8 +60,8 @@ func UseLevenshtein() configure.Option {
 // @return configure.Option
 //
 func UseSines() configure.Option {
-	return func(config *configure.Config) {
-		// TODO
+	return func(cfg *configure.Config) {
+		cfg.Algorithm = configure.ALGORITHM_SINES
 	}
 }
 
@@ -71,8 +71,8 @@ func UseSines() configure.Option {
 // @return configure.Option
 //
 func UseCosines() configure.Option {
-	return func(config *configure.Config) {
-		// TODO
+	return func(cfg *configure.Config) {
+		cfg.Algorithm = configure.ALGORITHM_COSINES
 	}
 }
 
@@ -82,8 +82,8 @@ func UseCosines() configure.Option {
 // @return configure.Option
 //
 func UseDicesCoefficient() configure.Option {
-	return func(config *configure.Config) {
-		// TODO
+	return func(cfg *configure.Config) {
+		cfg.Algorithm = configure.ALGORITHM_DICES_COEFFICIENT
 	}
 }
 
@@ -93,8 +93,8 @@ func UseDicesCoefficient() configure.Option {
 // @return configure.Option
 //
 func UseHamming() configure.Option {
-	return func(config *configure.Config) {
-		// TODO
+	return func(cfg *configure.Config) {
+		cfg.Algorithm = configure.ALGORITHM_HAMMING
 	}
 }
 
@@ -104,27 +104,49 @@ func UseHamming() configure.Option {
 // @return configure.Option
 //
 func UseJaro() configure.Option {
-	return func(config *configure.Config) {
-		// TODO
+	return func(cfg *configure.Config) {
+		cfg.Algorithm = configure.ALGORITHM_JARO
 	}
 }
 
+//
+// @Description: 忽略大小写
+// @Date: 2021-03-29 14:10:35
+// @return configure.Option
+//
 func IgnoreCase() configure.Option {
 	return func(config *configure.Config) {
 		config.Ignore |= configure.IGNORE_CASE
 	}
 }
 
+//
+// @Description: 忽略空格
+// @Date: 2021-03-29 14:10:48
+// @return configure.Option
+//
 func IgnoreSpace() configure.Option {
 	return func(config *configure.Config) {
 		config.Ignore |= configure.IGNORE_SPACE
 	}
 }
+
+//
+// @Description: 忽略HTML
+// @Date: 2021-03-29 14:10:58
+// @return configure.Option
+//
 func IgnoreHtml() configure.Option {
 	return func(config *configure.Config) {
 		config.Ignore |= configure.IGNORE_HTML
 	}
 }
+
+//
+// @Description: 替换敏感词
+// @Date: 2021-03-29 14:11:09
+// @return configure.Option
+//
 func ReplaceTaboo() configure.Option {
 	return func(config *configure.Config) {
 		config.Ignore |= configure.REPLACE_TABOO
