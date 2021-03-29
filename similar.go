@@ -81,9 +81,14 @@ func UseCosines() configure.Option {
 // @Date: 2021-03-25 13:38:40
 // @return configure.Option
 //
-func UseDicesCoefficient() configure.Option {
+func UseDicesCoefficient(ngrams ...int) configure.Option {
 	return func(cfg *configure.Config) {
 		cfg.Algorithm = configure.ALGORITHM_DICES_COEFFICIENT
+		cfg.DicesCoefficient.Ngram = configure.DICES_COEFFICIENT_NGRAM
+
+		if len(ngrams) > 0 {
+			cfg.DicesCoefficient.Ngram = ngrams[0]
+		}
 	}
 }
 
@@ -103,9 +108,14 @@ func UseHamming() configure.Option {
 // @Date: 2021-03-25 13:38:13
 // @return configure.Option
 //
-func UseJaro() configure.Option {
+func UseJaro(matchWindows ...int) configure.Option {
 	return func(cfg *configure.Config) {
 		cfg.Algorithm = configure.ALGORITHM_JARO
+		cfg.Jaro.MatchWindow = configure.JARO_MATCH_WINDOW
+
+		if len(matchWindows) > 0 {
+			cfg.Jaro.MatchWindow = matchWindows[0]
+		}
 	}
 }
 

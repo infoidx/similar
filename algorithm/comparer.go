@@ -24,11 +24,15 @@ func New(cfg *configure.Config) Comparer {
 	case configure.ALGORITHM_COSINES:
 		comparer = &Cosines{}
 	case configure.ALGORITHM_DICES_COEFFICIENT:
-		comparer = &DicesCoefficient{}
+		comparer = &DicesCoefficient{
+			Ngram: cfg.DicesCoefficient.Ngram,
+		}
 	case configure.ALGORITHM_HAMMING:
 		comparer = &Hamming{}
 	case configure.ALGORITHM_JARO:
-		comparer = &Jaro{}
+		comparer = &Jaro{
+			MatchWindow: cfg.Jaro.MatchWindow,
+		}
 	case configure.ALGORITHM_SINES:
 		comparer = &Sines{}
 	case configure.ALGORITHM_LEVENSHTEIN:

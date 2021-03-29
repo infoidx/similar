@@ -30,12 +30,27 @@ const (
 	ALGORITHM_SINES
 )
 
+const (
+	DICES_COEFFICIENT_NGRAM = 2
+	JARO_MATCH_WINDOW       = 0
+)
+
 //
 // @Description: 配置项
 //
 type Config struct {
 	Ignore    int // 忽略。空格,大小写，html标签
 	Algorithm int // 所使用算法
+	DicesCoefficient
+	Jaro
+}
+
+type DicesCoefficient struct {
+	Ngram int
+}
+
+type Jaro struct {
+	MatchWindow int
 }
 
 //
